@@ -1,0 +1,133 @@
+/* Container geral da seção */
+#skills {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 80px;
+}
+
+/* Wrapper principal */
+.skills-container {
+  padding: 5% 10%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  h1 {
+    color: white;
+    margin-bottom: 40px;
+    font-size: 2.8rem;
+  }
+
+  svg {
+    color: white;
+  }
+}
+
+/* Grid de habilidades */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 50px;
+
+  .skill {
+    text-align: left;
+
+    h3 {
+      color: white;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      font-size: 1.5rem;
+    }
+
+    p {
+      color: #d9d9d9;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+  }
+}
+
+/* Chips (tecnologias) */
+.chip {
+  color: #272822 !important;
+  background-color: white !important;
+  font-size: 0.8rem !important;
+  height: 26px !important;
+
+  span {
+    font-family: 'Courier Prime', monospace !important;
+    color: #272822 !important;
+  }
+
+  svg {
+    height: 14px !important;
+  }
+}
+
+/* Grupo de chips */
+.flex-chips {
+  line-height: 2;
+  margin-top: 10px;
+
+  .chip-title {
+    color: white;
+    padding-right: 10px;
+    font-family: 'Courier Prime', monospace;
+    font-weight: bold;
+  }
+
+  .MuiChip-root {
+    margin-right: 0.5em;
+    margin-bottom: 0.5em;
+  }
+}
+
+/* Chips outlined (caso use algum) */
+.flex-chips .MuiChip-outlined {
+  background-color: #e0e0e0 !important;
+  border: 1px solid #bdbdbd !important;
+  font-family: 'Courier Prime', monospace;
+}
+
+.flex-chips .MuiChip-outlined span {
+  color: #272822 !important;
+}
+
+/* ===================== RESPONSIVIDADE ===================== */
+@media (max-width: 1024px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skills-container {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skill {
+    padding-bottom: 30px;
+  }
+}
+
+@media (max-width: 567px) {
+  #skills {
+    font-size: 14px;
+  }
+
+  .skills-container h1 {
+    font-size: 2.2rem;
+  }
+
+  .skill p {
+    font-size: 0.9rem;
+  }
+}

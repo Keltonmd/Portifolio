@@ -1,0 +1,71 @@
+/* ======== ESTILOS GERAIS DO TIMELINE ======== */
+
+#history {
+  width: 100%;
+  padding-top: 80px;
+}
+
+.items-container h1 {
+  color: white;
+  margin-bottom: 40px;
+  text-align: left;
+  font-size: 2.8rem;
+}
+
+/* Texto dentro da linha vertical */
+.vertical-timeline span {
+  color: white;
+  font-family: 'Courier Prime', monospace;
+}
+
+/* Parágrafos dentro dos cards */
+.vertical-timeline p,
+.vertical-timeline-element p {
+  color: rgb(39, 40, 34);
+  line-height: 1.5;
+}
+
+/* Títulos dentro dos cards */
+.vertical-timeline-element h3,
+.vertical-timeline-element h4 {
+  color: rgb(39, 40, 34);
+}
+
+/* Datas no card */
+.vertical-timeline-element .vertical-timeline-element-date {
+  color: white;
+  font-family: 'Courier Prime', monospace;
+}
+
+/* Ícones do FontAwesome */
+.svg-inline--fa {
+  color: white !important;
+}
+
+/* ======== RESPONSIVIDADE ======== */
+@media screen and (max-width: 1170px) {
+  .vertical-timeline-element .vertical-timeline-element-date {
+    color: rgb(39, 40, 34) !important; /* Data no card quando colado */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #history {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .items-container h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .vertical-timeline-element p {
+    font-size: 0.9rem;
+  }
+
+  .vertical-timeline-element h3 {
+    font-size: 1.2rem;
+  }
+}

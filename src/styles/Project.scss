@@ -1,0 +1,112 @@
+/* Container principal */
+.projects-container {
+    display: flex;
+    flex-direction: column;
+    padding: 5% 10%;
+    text-align: left;
+
+    h1 {
+        color: white;
+        font-size: 2.8rem;
+        margin-bottom: 20px;
+    }
+
+    .projects-subtitle {
+        color: #dcdcdc;
+        margin-bottom: 40px;
+        font-size: 1.1rem;
+    }
+}
+
+/* GRID PRINCIPAL */
+.projects-container .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 50px;
+}
+
+/* CADA CARD DE PROJETO */
+.projects-grid .project {
+    text-align: left;
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    transition: 0.3s ease;
+    overflow: hidden;
+
+    h2 {
+        color: rgb(39, 40, 34);
+        margin-top: 10px;
+        font-size: 1.4rem;
+        transition: 0.15s ease-in-out;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    p {
+        margin-top: 8px;
+        color: rgb(39, 40, 34);
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+}
+
+/* EFEITO DE ZOOM NAS IMAGENS */
+.zoom {
+    border-radius: 5px;
+    transition: transform .2s ease-in-out;
+    margin: 0 auto;
+}
+
+.zoom:hover {
+    transform: scale(1.05);
+}
+
+/* PLACEHOLDER ESTÉTICO (até ter projetos reais) */
+.project.placeholder {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 20px;
+
+    .placeholder-box {
+        height: 180px;
+        width: 100%;
+        background: linear-gradient(135deg, #bfbfbf, #e5e5e5);
+        border-radius: 8px;
+        margin-bottom: 15px;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+        color: rgb(39, 40, 34);
+    }
+
+    p {
+        color: rgb(39, 40, 34);
+        font-size: 0.95rem;
+    }
+}
+
+/* RESPONSIVIDADE */
+@media (max-width: 900px) {
+    .projects-container .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 700px) {
+    .projects-container {
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+
+    .projects-container .projects-grid {
+        display: block;
+    }
+
+    .projects-container .projects-grid .project {
+        padding-bottom: 5%;
+    }
+}
