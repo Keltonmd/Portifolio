@@ -12,16 +12,6 @@
   display: flex;
   flex-direction: column;
   text-align: left;
-
-  h1 {
-    color: white;
-    margin-bottom: 40px;
-    font-size: 2.8rem;
-  }
-
-  svg {
-    color: white;
-  }
 }
 
 /* Grid de habilidades */
@@ -34,14 +24,12 @@
     text-align: left;
 
     h3 {
-      color: white;
       margin-top: 15px;
       margin-bottom: 10px;
       font-size: 1.5rem;
     }
 
     p {
-      color: #d9d9d9;
       font-size: 1rem;
       margin-bottom: 15px;
       line-height: 1.5;

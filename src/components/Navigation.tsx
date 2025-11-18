@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -18,7 +18,6 @@ import Toolbar from "@mui/material/Toolbar";
 
 const drawerWidth = 240;
 
-// ⭐ Menu organizado com IDs corretos
 const navItems: [string, string][] = [
   ["Skills", "skills"],
   ["História", "history"],
@@ -26,7 +25,6 @@ const navItems: [string, string][] = [
   ["Contato", "contact"],
 ];
 
-// ⭐ Melhor tipagem da prop
 interface NavigationProps {
   parentToChild: {
     mode: "light" | "dark";
@@ -44,7 +42,6 @@ function Navigation({ parentToChild, modeChange }: NavigationProps) {
     setMobileOpen((prev) => !prev);
   };
 
-  // ⭐ Detecta scroll pra navbar com blur
   useEffect(() => {
     const handleScroll = () => {
       const navbar = document.getElementById("navigation");
@@ -56,7 +53,6 @@ function Navigation({ parentToChild, modeChange }: NavigationProps) {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // ⭐ Função de scroll suave para a section correspondente
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -105,14 +101,12 @@ function Navigation({ parentToChild, modeChange }: NavigationProps) {
             <MenuIcon />
           </IconButton>
 
-          {/* ☀/🌙 Dark mode toggle */}
           {mode === "dark" ? (
             <LightModeIcon onClick={modeChange} sx={{ cursor: "pointer", mr: 1 }} />
           ) : (
             <DarkModeIcon onClick={modeChange} sx={{ cursor: "pointer", mr: 1 }} />
           )}
 
-          {/* DESKTOP MENU */}
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map(([label, id]) => (
               <Button key={label} onClick={() => scrollToSection(id)} sx={{ color: "#fff" }}>
@@ -123,7 +117,6 @@ function Navigation({ parentToChild, modeChange }: NavigationProps) {
         </Toolbar>
       </AppBar>
 
-      {/* MOBILE DRAWER */}
       <nav>
         <Drawer
           variant="temporary"

@@ -1,31 +1,21 @@
-/* Container principal */
 .projects-container {
     display: flex;
     flex-direction: column;
     padding: 5% 10%;
     text-align: left;
 
-    h1 {
-        color: white;
-        font-size: 2.8rem;
-        margin-bottom: 20px;
-    }
-
     .projects-subtitle {
-        color: #dcdcdc;
         margin-bottom: 40px;
         font-size: 1.1rem;
     }
 }
 
-/* GRID PRINCIPAL */
 .projects-container .projects-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 50px;
 }
 
-/* CADA CARD DE PROJETO */
 .projects-grid .project {
     text-align: left;
     background-color: white;
@@ -53,7 +43,6 @@
     }
 }
 
-/* EFEITO DE ZOOM NAS IMAGENS */
 .zoom {
     border-radius: 5px;
     transition: transform .2s ease-in-out;
@@ -64,7 +53,6 @@
     transform: scale(1.05);
 }
 
-/* PLACEHOLDER ESTÉTICO (até ter projetos reais) */
 .project.placeholder {
     text-align: center;
     background-color: rgba(255, 255, 255, 0.95);

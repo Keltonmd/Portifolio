@@ -1,6 +1,7 @@
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import '../styles/Home.scss';
+import avatar from "../assets/avatar_circular.png";
 
 function Home() {
   return (
@@ -9,7 +10,7 @@ function Home() {
         <div className='home-about-section'>
             <div className='home-image-wrapper'>
                 <img 
-                    src="" 
+                    src={avatar} 
                     alt="avatar" 
                 />
             </div>
@@ -24,7 +25,7 @@ function Home() {
                     </a>
                 </div>
 
-                <h1>Hi, I'm Kelton Martins</h1>
+                <h1>Kelton Martins</h1>
                 <p>Desenvolvedor Back-end | IoT | AI & Robotics</p>
 
                 <div className="home-mobile-social-icons">
