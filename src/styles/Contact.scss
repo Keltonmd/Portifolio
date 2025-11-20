@@ -4,8 +4,12 @@
   margin-right: 5px;
 }
 
+.contact-wrapper h1{
+  margin-bottom: 5px !important;
+}
+
 .contact-form {
-  padding-top: 20px;
+  padding-top: 5px;
 
   button {
     float: right;
@@ -20,9 +24,28 @@
     color: white !important;
   }
 
-  fieldset {
-    background-color: rgb(255, 255, 255);
+  .MuiOutlinedInput-root {
+    background: white;
     border-radius: 6px;
+    color: black;
+
+    fieldset {
+      border-radius: 6px;
+    }
+  }
+
+  .MuiInputLabel-shrink {
+    font-size: 16px !important;
+    color: #0509ff !important;  // amarelo neon super forte
+    font-weight: 600;           // deixa mais visível
+    letter-spacing: 0.5px;
+    margin-top: 5px;      // melhora leitura
+  }
+
+  .MuiInputLabel-root {
+    color: black;
+    font-size: 15px;
+    
   }
 }
 

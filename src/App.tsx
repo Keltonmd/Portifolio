@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 
-import Navigation from "./components/Navigation";
-import Footer from "./components/Footer";
-import FadeIn from "./components/FadeIn";
+import {
+  Home,
+  Skills,
+  History,
+  Project,
+  Contact,
+} from "./pages";
 
-import Home from "./pages/Home";
-import Skills from "./pages/Skills";
-import History from "./pages/History";
-import Project from "./pages/Project";
-import Contact from "./pages/Contact";
+import {
+  Navigation,
+  Footer,
+  FadeIn,
+} from "./components";
 
 import "./styles/index.scss";
 
@@ -42,6 +46,6 @@ function App() {
       <Footer />
     </div>
   );
-}
+} 
 
 export default App;

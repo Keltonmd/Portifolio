@@ -40,7 +40,7 @@ p, a, h1, h2, h3, h4, h5, label, button {
   button {
     font-size: 1.1rem;
     font-family: "Lato", sans-serif;
-    text-transform: initial;
+    text-transform: none;
     padding: 6px 10px;
   }
 
@@ -112,8 +112,8 @@ p, a, h1, h2, h3, h4, h5, label, button {
     color: #0d1116;
   }
 
-  .about-section {
-    background-image: url("./assets/images/bg-light.png");
+  .home-about-section {
+    background-image: url("/src/assets/bg-light.png") !important;
   }
 
   .skills-container svg {
@@ -125,20 +125,23 @@ p, a, h1, h2, h3, h4, h5, label, button {
     box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   }
 
-  .vertical-timeline::before {
-    background-color: rgba(0, 0, 0, 0.08);
+  .MuiTimelineOppositeContent-root {
+    color: #000000 !important;
   }
 
-  .vertical-timeline--animate .vertical-timeline-element-content.bounce-in {
-    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+  .MuiTimelineContent-root h3,
+  .MuiTimelineContent-root h4,
+  .MuiTimelineContent-root p {
+    color: #000000 !important; 
   }
 
-  .vertical-timeline--two-columns .vertical-timeline-element-content .vertical-timeline-element-date {
-    color: gray;
+  .MuiTimelineDot-root {
+    background-color: #5000ca !important;
+    color: white !important;
   }
 
-  .vertical-timeline-element-content-arrow {
-    border-right: 7px solid rgba(0, 0, 0, 0.08) !important;
+  .MuiTimelineConnector-root {
+    background-color: #00000033 !important;
   }
 
   .flex-chips .chip-title {

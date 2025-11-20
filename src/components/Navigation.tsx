@@ -90,7 +90,6 @@ function Navigation({ parentToChild, modeChange }: NavigationProps) {
         className={`navbar-fixed-top${scrolled ? " scrolled" : ""}`}
       >
         <Toolbar className="navigation-bar">
-          {/* ☰ MOBILE MENU BUTTON */}
           <IconButton
             color="inherit"
             aria-label="open drawer"

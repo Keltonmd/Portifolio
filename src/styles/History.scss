@@ -9,25 +9,25 @@
   font-size: 2.8rem;
 }
 
-.vertical-timeline span {
-  color: white;
-  font-family: 'Courier Prime', monospace;
+.MuiTimelineOppositeContent-root {
+  color: #ffffff !important;
 }
 
-.vertical-timeline p,
-.vertical-timeline-element p {
-  color: rgb(39, 40, 34);
-  line-height: 1.5;
+.MuiTimelineContent-root h3,
+.MuiTimelineContent-root h4,
+.MuiTimelineContent-root p {
+  color: white !important;
 }
 
-.vertical-timeline-element h3,
-.vertical-timeline-element h4 {
-  color: rgb(39, 40, 34);
+.MuiTimelineDot-root {
+  background-color: #5000ca !important;
+  color: white !important;
 }
 
-.vertical-timeline-element .vertical-timeline-element-date {
-  font-family: 'Courier Prime', monospace;
+.MuiTimelineConnector-root {
+  background-color: #ffffff33 !important;
 }
+
 
 .svg-inline--fa {
   color: white !important;
@@ -35,7 +35,7 @@
 
 @media screen and (max-width: 1170px) {
   .vertical-timeline-element .vertical-timeline-element-date {
-    color: rgb(39, 40, 34) !important; /* Data no card quando colado */
+    color: rgb(160, 186, 28) !important; /* Data no card quando colado */
   }
 }
 

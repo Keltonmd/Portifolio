@@ -89,7 +89,7 @@ function Contact() {
         <div id="contact">
             <div className="items-container">
                 <div className="contact-wrapper">
-                    <h1>Contact</h1>
+                    <h1>Contato</h1>
                     <p>
                         Tem uma ideia, projeto ou duvida?
                         <br /> Vamos conversar!

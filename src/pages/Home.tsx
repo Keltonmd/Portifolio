@@ -5,8 +5,7 @@ import avatar from "../assets/avatar_circular.png";
 
 function Home() {
   return (
-    <div className='home-container'>
-
+    <div className='container'>
         <div className='home-about-section'>
             <div className='home-image-wrapper'>
                 <img 
