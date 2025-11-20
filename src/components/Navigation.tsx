@@ -57,8 +57,6 @@ function Navigation({ parentToChild, modeChange }: NavigationProps) {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
-    } else {
-      console.error(`Elemento com id "${sectionId}" não encontrado.`);
     }
   };
 
@@ -89,33 +87,70 @@ function Navigation({ parentToChild, modeChange }: NavigationProps) {
         id="navigation"
         className={`navbar-fixed-top${scrolled ? " scrolled" : ""}`}
       >
-        <Toolbar className="navigation-bar">
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
+        <Toolbar
+          className="navigation-bar"
+          sx={{
+            display: "flex !important",
+            flexDirection: "row !important",
+            alignItems: "center !important",
+            width: "100% !important",
+            justifyContent: "space-between !important",
+            px: 2,
+          }}
+        >
+          {/* ESQUERDA — menu mobile + nav desktop */}
+          <Box
+            sx={{
+              display: "flex !important",
+              alignItems: "center !important",
+              justifyContent: "flex-start !important",
+            }}
           >
-            <MenuIcon />
-          </IconButton>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{
+                mr: 1,
+                display: { xs: "inline-flex", sm: "none" }
+              }}
+            >
+              <MenuIcon />
+            </IconButton>
 
-          {mode === "dark" ? (
-            <LightModeIcon onClick={modeChange} sx={{ cursor: "pointer", mr: 1 }} />
-          ) : (
-            <DarkModeIcon onClick={modeChange} sx={{ cursor: "pointer", mr: 1 }} />
-          )}
+            {/* NAV DESKTOP */}
+            <Box
+              // Isso esconde os itens da navegação para menu
+              sx={{
+                display: { xs: "none", sm: "flex" },
+                gap: 1
+              }}
+            >
+              {navItems.map(([label, id]) => (
+                <Button
+                  key={label}
+                  onClick={() => scrollToSection(id)}
+                  sx={{ color: "#fff" }}
+                >
+                  {label}
+                </Button>
+              ))}
+            </Box>
+          </Box>
 
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
-            {navItems.map(([label, id]) => (
-              <Button key={label} onClick={() => scrollToSection(id)} sx={{ color: "#fff" }}>
-                {label}
-              </Button>
-            ))}
+          {/* DIREITA — ícone de tema */}
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            {mode === "dark" ? (
+              <LightModeIcon onClick={modeChange} sx={{ cursor: "pointer" }} />
+            ) : (
+              <DarkModeIcon onClick={modeChange} sx={{ cursor: "pointer" }} />
+            )}
           </Box>
         </Toolbar>
       </AppBar>
 
+      {/* Drawer (mobile) */}
       <nav>
         <Drawer
           variant="temporary"

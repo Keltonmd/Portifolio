@@ -40,7 +40,7 @@ p, a, h1, h2, h3, h4, h5, label, button {
   button {
     font-size: 1.1rem;
     font-family: "Lato", sans-serif;
-    text-transform: none;
+    text-transform: initial;
     padding: 6px 10px;
   }
 
@@ -117,7 +117,7 @@ p, a, h1, h2, h3, h4, h5, label, button {
   }
 
   .skills-container svg {
-    color: #0d1116;
+    color: #0d1116 !important;
   }
 
   .chip {
@@ -155,4 +155,10 @@ p, a, h1, h2, h3, h4, h5, label, button {
       padding: 5% 5%;
     }
   }
+
+  @media (max-width: 400px) {
+  .items-container {
+    padding: 5% 2%;
+  }
+}
 }
