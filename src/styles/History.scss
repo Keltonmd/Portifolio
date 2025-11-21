@@ -1,6 +1,5 @@
 #history {
   width: 100%;
-  padding-top: 80px;
 }
 
 .items-container {
@@ -79,8 +78,8 @@
 
   .items-container h1 {
     font-size: 2.2rem;
-    text-align: left; /* Mantido à esquerda conforme solicitado */
-    padding-left: 0; /* Remove padding extra se necessário no mobile */
+    text-align: left; 
+    padding-left: 0; 
   }
 
   // Em telas menores, talvez você queira esconder o conector oposto ou ajustar a fonte
