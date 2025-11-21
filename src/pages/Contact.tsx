@@ -139,7 +139,7 @@ function Contact() {
                                 label="Mensagem"
                                 placeholder = "Escreva sua mensagem"
                                 multiline
-                                rows={8}
+                                rows={5}
                                 value={message}
                                 onChange={(e) => setMessage(e.target.value)}
                                 error={messageError}
