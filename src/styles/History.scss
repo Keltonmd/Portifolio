@@ -3,42 +3,74 @@
   padding-top: 80px;
 }
 
-.items-container h1 {
-  margin-bottom: 40px;
-  text-align: left;
-  font-size: 2.8rem;
-}
-
-.MuiTimelineOppositeContent-root {
-  color: #ffffff !important;
-}
-
-.MuiTimelineContent-root h3,
-.MuiTimelineContent-root h4,
-.MuiTimelineContent-root p {
-  color: white !important;
-}
-
-.MuiTimelineDot-root {
-  background-color: #5000ca !important;
-  color: white !important;
-}
-
-.MuiTimelineConnector-root {
-  background-color: #ffffff33 !important;
-}
-
-
-.svg-inline--fa {
-  color: white !important;
-}
-
-@media screen and (max-width: 1170px) {
-  .vertical-timeline-element .vertical-timeline-element-date {
-    color: rgb(160, 186, 28) !important; /* Data no card quando colado */
+.items-container {
+  h1 {
+    margin-bottom: 40px;
+    text-align: left;
+    font-size: 2.8rem;
+    color: white; 
+    padding-left: 20px;
   }
 }
 
+// Estilização do CARD (O novo Paper)
+.timeline-card {
+  padding: 20px;
+  text-align: left;
+  background-color: #ffffff !important; 
+  color: #333333 !important; 
+  border-radius: 8px !important;
+  
+  // Estilo específico para os textos dentro do card
+  h6 {
+    font-weight: bold !important;
+    color: #000 !important;
+  }
+
+  .subtitle {
+    font-size: 0.9rem !important;
+    color: #5000ca !important; 
+    margin-bottom: 8px !important;
+    font-weight: 600 !important;
+  }
+
+  .description {
+    font-size: 0.95rem !important;
+    color: #555 !important;
+    line-height: 1.5 !important;
+  }
+}
+
+// Data (Lado oposto do card)
+.MuiTimelineOppositeContent-root {
+  color: #ffffff !important; 
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+}
+
+// Cores dos Pontos e Conectores
+.MuiTimelineDot-root {
+  box-shadow: 0 0 10px rgba(80, 0, 202, 0.5); // Um brilho suave
+  
+  &.MuiTimelineDot-filledPrimary {
+     background-color: #5000ca !important;
+  }
+  &.MuiTimelineDot-filledSecondary {
+     background-color: #ca0050 !important;
+  }
+  
+  svg {
+    color: white !important;
+    font-size: 1.2rem;
+  }
+}
+
+.MuiTimelineConnector-root {
+  background-color: #ffffff33 !important; 
+  width: 3px !important; 
+}
+
+// Responsividade
 @media screen and (max-width: 768px) {
   #history {
     padding-left: 5%;
@@ -47,17 +79,11 @@
 
   .items-container h1 {
     font-size: 2.2rem;
+    text-align: center;
+  }
+
+  // Em telas menores, talvez você queira esconder o conector oposto ou ajustar a fonte
+  .MuiTimelineOppositeContent-root {
+    font-size: 0.85rem !important;
   }
 }
-
-@media screen and (max-width: 480px) {
-  .vertical-timeline-element p {
-    font-size: 0.9rem;
-  }
-
-  .vertical-timeline-element h3 {
-    font-size: 1.2rem;
-  }
-}
-
-
