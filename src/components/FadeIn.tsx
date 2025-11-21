@@ -54,8 +54,8 @@ export default function FadeIn({
           className={childClassName}
           style={{
             transition: `opacity ${transitionDuration}ms ease, transform ${transitionDuration}ms ease`,
+            transform: maxVisible > index ? "none" : "translateY(20px)",
             opacity: maxVisible > index ? 1 : 0,
-            transform: maxVisible > index ? "translateY(0px)" : "translateY(20px)",
           }}
         >
           {child}
