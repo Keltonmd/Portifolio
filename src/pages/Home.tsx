@@ -25,7 +25,7 @@ function Home() {
                 </div>
 
                 <h1>Kelton Martins</h1>
-                <p>Desenvolvedor Back-end | IoT | AI & Robotics</p>
+                <p>Desenvolvedor Back-End | Java | Spring Boot | Python | APIs REST | SQL</p>
 
                 <div className="home-mobile-social-icons">
                     <a href="https://github.com/keltonmd" target="_blank" rel="noreferrer">
