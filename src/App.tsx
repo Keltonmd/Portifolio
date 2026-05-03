@@ -1,51 +1,54 @@
-import { useState, useEffect } from "react";
-
-import {
-  Home,
-  Skills,
-  History,
-  Project,
-  Contact,
-} from "./pages";
-
-import {
-  Navigation,
-  Footer,
-  FadeIn,
-} from "./components";
+import { useEffect, useState } from "react";
+import { Navigation, Footer } from "./components";
+import { Contact, History, Home, Project, Skills } from "./pages";
 
 import "./styles/index.scss";
 
 function App() {
-  const [mode, setMode] = useState<"light" | "dark">("dark");
+  const [theme, setTheme] = useState<"dark" | "light">(() => {
+    if (typeof window === "undefined") {
+      return "dark";
+    }
 
-  const handleModeChange = () => {
-    setMode((prev) => (prev === "dark" ? "light" : "dark"));
-  };
+    const storedTheme = window.localStorage.getItem("portfolio-theme");
+
+    if (storedTheme === "dark" || storedTheme === "light") {
+      return storedTheme;
+    }
+
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  });
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  }, []);
+    window.localStorage.setItem("portfolio-theme", theme);
+  }, [theme]);
 
   return (
-    <div className={`main-container ${mode === "dark" ? "dark-mode" : "light-mode"}`}>
-      
+    <div className={`app-shell theme-${theme}`}>
+      <a className="skip-link" href="#main-content">
+        Ir para o conteúdo
+      </a>
+
       <Navigation
-        parentToChild={{ mode }}
-        modeChange={handleModeChange}
+        theme={theme}
+        onToggleTheme={() =>
+          setTheme((current) => (current === "dark" ? "light" : "dark"))
+        }
       />
 
-      <FadeIn transitionDuration={700}>
+      <main id="main-content" className="main-content">
         <Home />
         <Skills />
         <History />
         <Project />
         <Contact />
-      </FadeIn>
+      </main>
 
       <Footer />
     </div>
   );
-} 
+}
 
 export default App;
