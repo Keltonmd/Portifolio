@@ -1,4 +1,4 @@
-import corporateSystemsCover from "../assets/projects/desenvolvimento-sistemas-corporativos.svg";
+import corporateSystemsCover from "../assets/projects/desenvolvimento-sistemas-corporativos.png";
 import edgeBoxAiCover from "../assets/projects/edgeboxai.jpeg";
 import fazendaCover from "../assets/projects/fazenda.png";
 import navalStrikeCover from "../assets/projects/navalstrike.png";
