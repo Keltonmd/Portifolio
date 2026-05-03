@@ -1,89 +1,83 @@
-#history {
-  width: 100%;
+.history-timeline {
+  position: relative;
+  display: grid;
+  gap: 18px;
 }
 
-.items-container {
-  h1 {
-    margin-bottom: 40px;
-    text-align: left;
-    font-size: 2.8rem;
-    color: white; 
-    padding-left: 20px;
-  }
+.history-entry {
+  display: grid;
+  gap: 10px;
+  position: relative;
 }
 
-// Estilização do CARD (O novo Paper)
-.timeline-card {
-  padding: 20px;
-  text-align: left;
-  background-color: #ffffff !important; 
-  color: #333333 !important; 
-  border-radius: 8px !important;
-  
-  // Estilo específico para os textos dentro do card
-  h6 {
-    font-weight: bold !important;
-    color: #000 !important;
-  }
-
-  .subtitle {
-    font-size: 0.9rem !important;
-    color: #5000ca !important; 
-    margin-bottom: 8px !important;
-    font-weight: 600 !important;
-  }
-
-  .description {
-    font-size: 0.95rem !important;
-    color: #555 !important;
-    line-height: 1.5 !important;
-  }
+.history-entry__period {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
 }
 
-// Data (Lado oposto do card)
-.MuiTimelineOppositeContent-root {
-  color: #ffffff !important; 
-  font-weight: 500 !important;
-  font-size: 1rem !important;
+.history-entry__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--panel-strong);
+  border: 1px solid var(--border);
+  color: var(--accent-strong);
 }
 
-// Cores dos Pontos e Conectores
-.MuiTimelineDot-root {
-  box-shadow: 0 0 10px rgba(80, 0, 202, 0.5); // Um brilho suave
-  
-  &.MuiTimelineDot-filledPrimary {
-     background-color: #5000ca !important;
-  }
-  &.MuiTimelineDot-filledSecondary {
-     background-color: #ca0050 !important;
-  }
-  
-  svg {
-    color: white !important;
-    font-size: 1.2rem;
-  }
+.history-entry__icon--work {
+  color: #f4c15d;
 }
 
-.MuiTimelineConnector-root {
-  background-color: #ffffff33 !important; 
-  width: 3px !important; 
+.history-entry__card {
+  display: grid;
+  gap: 8px;
 }
 
-// Responsividade
-@media screen and (max-width: 768px) {
-  #history {
-    padding-left: 5%;
-    padding-right: 5%;
+.history-entry__organization {
+  color: var(--accent-strong);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.history-entry__card h4 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.history-entry__description {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (min-width: 768px) {
+  .history-timeline::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 134px;
+    width: 1px;
+    background: var(--border);
   }
 
-  .items-container h1 {
-    font-size: 2.2rem;
-    text-align: left; 
-    padding-left: 0; 
+  .history-entry {
+    grid-template-columns: 110px 42px minmax(0, 1fr);
+    align-items: start;
+    gap: 14px;
   }
 
-  // Em telas menores, talvez você queira esconder o conector oposto ou ajustar a fonte
-  .MuiTimelineOppositeContent-root {
-    font-size: 0.85rem !important;
+  .history-entry__period {
+    padding-top: 10px;
+  }
+
+  .history-entry__icon {
+    position: relative;
+    z-index: 1;
   }
 }

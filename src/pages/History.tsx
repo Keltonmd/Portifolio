@@ -1,132 +1,43 @@
-import Timeline from "@mui/lab/Timeline";
-import TimelineItem from "@mui/lab/TimelineItem";
-import TimelineSeparator from "@mui/lab/TimelineSeparator";
-import TimelineConnector from "@mui/lab/TimelineConnector";
-import TimelineContent from "@mui/lab/TimelineContent";
-import TimelineDot from "@mui/lab/TimelineDot";
-import TimelineOppositeContent from "@mui/lab/TimelineOppositeContent";
-import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-
-import WorkIcon from "@mui/icons-material/Work";
-import SchoolIcon from "@mui/icons-material/School";
-
+import SchoolRoundedIcon from "@mui/icons-material/SchoolRounded";
+import WorkRoundedIcon from "@mui/icons-material/WorkRounded";
+import { FadeIn } from "../components";
+import { historyEntries } from "../data/siteContent";
 import "../styles/History.scss";
 
-const historyItems = [
-  {
-    date: "2022 — 05/2026",
-    title: "Bacharelado em Sistemas de Informação",
-    subtitle: "IFNMG — Campus Januária",
-    description:
-      "Desenvolvimento de software, IA, redes, sistemas distribuídos e engenharia de software.",
-    icon: <SchoolIcon />,
-    color: "primary" as const,
-  },
-  {
-    date: "2019 — 2022",
-    title: "Técnico em Informática para Internet",
-    subtitle: "IFNMG — Integrado ao Ensino Médio",
-    description:
-      "Desenvolvimento web, algoritmos, banco de dados, manutenção e redes de computadores.",
-    icon: <SchoolIcon />,
-    color: "primary" as const,
-  },
-  {
-    date: "08/2024 — 12/2024",
-    title: "Bolsa Treinamento — SESU IFNMG",
-    subtitle: "Secretaria de Ensino Superior",
-    description:
-      "Gerenciamento de formulários, planilhas de matrícula e atendimento aos alunos.",
-    icon: <WorkIcon />,
-    color: "secondary" as const,
-  },
-  {
-    date: "06/2025 — 12/2025",
-    title: "PIBITI — Desenvolvimento Tecnológico",
-    subtitle: "IFNMG — Pesquisa Científica",
-    description:
-      "Desenvolvimento de ecossistema IoRT para comunicação e colaboração entre robôs de serviço e agentes distribuídos.",
-    icon: <WorkIcon />,
-    color: "secondary" as const,
-  },
-];
-
 function HistoryTimeline() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
   return (
-    <div id="history">
-      <div className="items-container">
-        <h1>Minha Trajetória</h1>
+    <section id="history" className="history-section section" aria-label="Trajetória">
+      <div className="section__inner">
+        <FadeIn className="section-header" duration={420}>
+          <p className="eyebrow">Trajetória</p>
+          <h2 className="section-title">Linha do tempo.</h2>
+        </FadeIn>
 
-        <Timeline
-          position={isMobile ? "right" : "alternate"}
-          sx={
-            isMobile
-              ? {
-                  padding: 0,
-                  "& .MuiTimelineItem-root:before": {
-                    flex: 0,
-                    padding: 0,
-                  },
-                }
-              : {}
-          }
-        >
-          {historyItems.map((item, index) => (
-            <TimelineItem key={index}>
-              {!isMobile && (
-                <TimelineOppositeContent
-                  sx={{ m: "auto 0" }}
-                  align="right"
-                  variant="body2"
-                  color="text.secondary"
-                >
-                  {item.date}
-                </TimelineOppositeContent>
-              )}
-
-              <TimelineSeparator>
-                <TimelineConnector />
-                <TimelineDot color={item.color}>{item.icon}</TimelineDot>
-                <TimelineConnector />
-              </TimelineSeparator>
-
-              <TimelineContent sx={{ py: "12px", px: 2 }}>
-                <Paper elevation={3} className="timeline-card">
-                  {isMobile && (
-                    <Typography
-                      variant="caption"
-                      display="block"
-                      sx={{
-                        color: "#5000ca",
-                        fontWeight: "bold",
-                        marginBottom: "8px",
-                        fontSize: "0.85rem",
-                      }}
-                    >
-                      {item.date}
-                    </Typography>
-                  )}
-
-                  <Typography variant="h6" component="span">
-                    {item.title}
-                  </Typography>
-                  <Typography className="subtitle">{item.subtitle}</Typography>
-                  <Typography className="description">
-                    {item.description}
-                  </Typography>
-                </Paper>
-              </TimelineContent>
-            </TimelineItem>
+        <div className="history-timeline">
+          {historyEntries.map((entry, index) => (
+            <FadeIn
+              key={`${entry.period}-${entry.title}`}
+              className="history-entry"
+              delay={index * 60}
+              duration={430}
+            >
+              <div className="history-entry__period">{entry.period}</div>
+              <div
+                className={`history-entry__icon history-entry__icon--${entry.kind}`}
+                aria-hidden="true"
+              >
+                {entry.kind === "study" ? <SchoolRoundedIcon /> : <WorkRoundedIcon />}
+              </div>
+              <article className="history-entry__card card">
+                <p className="history-entry__organization">{entry.organization}</p>
+                <h4>{entry.title}</h4>
+                <p className="history-entry__description">{entry.summary}</p>
+              </article>
+            </FadeIn>
           ))}
-        </Timeline>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 
