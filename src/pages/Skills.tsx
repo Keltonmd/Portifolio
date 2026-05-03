@@ -1,180 +1,113 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import type { ReactElement } from "react";
+import { FadeIn } from "../components";
+import { capabilityGroups, professionalSummary } from "../data/siteContent";
+import "../styles/Skills.scss";
+
 import {
-    faReact,
-    faPython,
-    faJava,
-    faJs,
-    faDocker,
-    faLinux,
-} from '@fortawesome/free-brands-svg-icons';
+  SiOpenjdk, SiSpringboot, SiPhp, SiSymfony, SiPython, SiFlask, SiNodedotjs,
+  SiReact, SiTypescript, SiJavascript, SiHtml5, SiCss, SiBootstrap,
+  SiPostgresql, SiMysql, SiMongodb,
+  SiDocker, SiNginx, SiLinux, SiGithubactions,
+  SiTensorflow, SiOpencv, SiPandas, SiOpenai, SiJunit5,
+} from "react-icons/si";
+import {
+  FiServer, FiMonitor, FiDatabase, FiCloud, FiShield, FiCpu, FiCheckSquare,
+} from "react-icons/fi";
 
-import Chip from '@mui/material/Chip';
-import '../styles/Skills.scss';
+// ── Ícones por nome de tecnologia ─────────────────────────────────────────
+const techIcons: Record<string, ReactElement> = {
+  // Backend
+  "Java":        <SiOpenjdk />,
+  "Spring Boot": <SiSpringboot />,
+  "PHP":         <SiPhp />,
+  "Symfony":     <SiSymfony />,
+  "Python":      <SiPython />,
+  "Flask":       <SiFlask />,
+  "Node.js":     <SiNodedotjs />,
+  // Frontend
+  "React":              <SiReact />,
+  "TypeScript":         <SiTypescript />,
+  "JavaScript (ES6+)":  <SiJavascript />,
+  "HTML5":              <SiHtml5 />,
+  "CSS3 / SCSS":        <SiCss />,
+  "Bootstrap":          <SiBootstrap />,
+  // Banco de Dados
+  "PostgreSQL": <SiPostgresql />,
+  "MySQL":      <SiMysql />,
+  "MongoDB":    <SiMongodb />,
+  // DevOps & Cloud
+  "Docker":           <SiDocker />,
+  "Docker Compose":   <SiDocker />,
+  "AWS (EC2, S3, RDS)": <FiCloud />,
+  "NGINX":            <SiNginx />,
+  "Linux":            <SiLinux />,
+  "GitHub Actions":   <SiGithubactions />,
+  // IA & Dados
+  "TensorFlow":        <SiTensorflow />,
+  "OpenCV":            <SiOpencv />,
+  "Pandas":            <SiPandas />,
+  "APIs de IA (LLMs)": <SiOpenai />,
+  // Qualidade
+  "JUnit": <SiJunit5 />,
+};
 
-
-const frontendSkills = [
-    "React",
-    "TypeScript",
-    "JavaScript",
-    "HTML5",
-    "CSS3",
-    "SCSS",
-];
-
-const backendSkills = [
-    "Java",
-    "Spring Boot",
-    "Python",
-    "Node.js",
-    "Flask",
-    "FastAPI",
-    "PostgreSQL",
-    "MongoDB",
-    "REST APIs",
-];
-
-const devopsSkills = [
-    "AWS EC2",
-    "NGINX",
-    "Docker",
-    "Linux",
-    "CI/CD",
-    "Git & GitHub",
-    "Reverse Proxy",
-    "PM2",
-    "SSH & Hardening",
-];
-
-const aiSkills = [
-    "TensorFlow",
-    "Keras",
-    "PyTorch",
-    "scikit-learn",
-    "Pandas",
-    "NumPy",
-    "CNNs",
-    "LLMs",
-];
-
-const iotSkills = [
-    "MQTT",
-    "Mosquitto",
-    "RabbitMQ",
-    "ESP32 / ESP32-S3",
-    "Intel Edison",
-    "CoppeliaSim",
-    "IoRT Multi-agente",
-    "Robótica de Serviço",
-    "Sistemas Distribuídos",
-];
-
-const softSkills = [
-    "Organização e Documentação",
-    "Metodologias Ágeis (Scrum/Kanban)",
-    "Boa comunicação",
-    "Trabalho em equipe",
-    "Proatividade",
-    "Visão de arquitetura",
-    "Resolução de problemas",
-];
-
-
+// ── Ícones de categoria (Feather) ─────────────────────────────────────────
+const categoryIcons: Record<string, ReactElement> = {
+  server:   <FiServer size={18} />,
+  monitor:  <FiMonitor size={18} />,
+  database: <FiDatabase size={18} />,
+  cloud:    <FiCloud size={18} />,
+  shield:   <FiShield size={18} />,
+  cpu:      <FiCpu size={18} />,
+  check:    <FiCheckSquare size={18} />,
+};
 
 function Skills() {
-    return (
-        <div className="container" id="skills">
-            <div className="skills-container">
-                <h1>Skills & Expertise</h1>
+  return (
+    <section id="skills" className="skills-section section" aria-label="Capacidades">
+      <div className="section__inner">
+        <FadeIn className="section-header" duration={420}>
+          <p className="eyebrow">Stack</p>
+          <h2 className="section-title">Tecnologias e Expertise.</h2>
+        </FadeIn>
 
-                <div className="skills-grid">
+        {/* Resumo profissional */}
+        <FadeIn className="skills-summary card" duration={430}>
+          <p className="skills-summary__label eyebrow">Resumo profissional</p>
+          <p className="skills-summary__text">{professionalSummary}</p>
+        </FadeIn>
 
-                    <div className="skill">
-                        <FontAwesomeIcon icon={faReact} size="3x"/>
-                        <h3>Frontend Development</h3>
-                        <p>Trabalho com React e TypeScript criando interfaces limpas, rápidas e objetivas. Gosto de montar componentes bem organizados, fáceis de manter e com boa responsividade. Sei estruturar desde o básico até telas completas, sempre priorizando clareza, usabilidade e performance. Meu foco é transformar ideias em interfaces realmente funcionais, não só bonitas.</p>
+        <div className="skills-grid">
+          {capabilityGroups.map((group) => (
+            <FadeIn key={group.title} className="capability-card card" duration={430}>
+              <div className="capability-card__header">
+                <span className="capability-card__icon" aria-hidden="true">
+                  {categoryIcons[group.icon] ?? categoryIcons.check}
+                </span>
+                <h3>{group.title}</h3>
+              </div>
 
-                        <div className="flex-chips">
-                            <span className="chip-title">Tecnologias:</span>
-                            {frontendSkills.map((label, index) => (
-                                <Chip key={index} className="chip" label={label} />
-                            ))}
-                        </div>
-                    </div>
+              <p className="capability-card__summary">{group.description}</p>
 
-
-                    <div className="skill">
-                        <FontAwesomeIcon icon={faJava} size="3x"/>
-                        <h3>Backend Development</h3>
-                        <p>Tenho experiência sólida em Java com Spring Boot, Python e Node.js. Sei montar APIs completas, seguras e bem documentadas. Entendo de arquitetura, padrões, autenticação e integração com PostgreSQL. Gosto de backend limpo e direto, que funciona, escala e resolve problema real. Meu objetivo é entregar algo robusto, não complicado.</p>
-
-                        <div className="flex-chips">
-                            <span className="chip-title">Tecnologias:</span>
-                            {backendSkills.map((label, index) => (
-                                <Chip key={index} className="chip" label={label} />
-                            ))}
-                        </div>
-                    </div>
-
-
-                    <div className="skill">
-                        <FontAwesomeIcon icon={faDocker} size="3x"/>
-                        <h3>DevOps, Servidores & Cloud</h3>
-                        <p>Já configurei vários ambientes Linux, servidores Nginx, HTTPS, deploys na AWS EC2 e automações com Docker e GitHub Actions. Sei lidar com SSH, redes, processos e segurança. Curto transformar um código rodando localmente em algo realmente disponível online, com estabilidade, logs e tudo funcionando como deve ser.</p>
-
-                        <div className="flex-chips">
-                            <span className="chip-title">Ferramentas:</span>
-                            {devopsSkills.map((label, index) => (
-                                <Chip key={index} className="chip" label={label} />
-                            ))}
-                        </div>
-                    </div>
-
-
-                    <div className="skill">
-                        <FontAwesomeIcon icon={faPython} size="3x"/>
-                        <h3>Inteligência Artificial & Deep Learning</h3>
-                        <p>Trabalho com TensorFlow, Keras, PyTorch e scikit-learn criando modelos de classificação, visão computacional e soluções práticas. Já treinei CNNs, fiz quantização para rodar em dispositivos embarcados e integrei IA com sistemas reais. Gosto de unir teoria com prática: entender o modelo, medir, ajustar e colocar para funcionar.</p>
-
-                        <div className="flex-chips">
-                            <span className="chip-title">Frameworks:</span>
-                            {aiSkills.map((label, index) => (
-                                <Chip key={index} className="chip" label={label} />
-                            ))}
-                        </div>
-                    </div>
-
-
-                    <div className="skill">
-                        <FontAwesomeIcon icon={faJs} size="3x"/>
-                        <h3>IoT, IoRT e Robótica</h3>
-                        <p>Tenho experiência real montando sistemas IoT e IoRT com ESP32, Intel Edison, MQTT, RabbitMQ e simulações no CoppeliaSim. Já trabalhei com robôs multiagentes, automação e comunicação distribuída. Sei unir hardware, software e rede. Gosto desse mundo porque tudo acontece de verdade: dados, sensores, movimento e decisão.</p>
-
-                        <div className="flex-chips">
-                            <span className="chip-title">Experiência:</span>
-                            {iotSkills.map((label, index) => (
-                                <Chip key={index} className="chip" label={label} />
-                            ))}
-                        </div>
-                    </div>
-
-
-                    <div className="skill">
-                        <FontAwesomeIcon icon={faLinux} size="3x"/>
-                        <h3>Comportamento & Metodologias</h3>
-                        <p>Sou uma pessoa organizada, curiosa e que aprende rápido. Gosto de trabalhar com clareza, documentação e comunicação direta. Sei me virar sozinho quando preciso, mas também colaboro bem em equipe. Uso metodologias ágeis de forma prática, sem exageros. Meu foco é entregar, melhorar e crescer tecnicamente a cada projeto.</p>
-
-                        <div className="flex-chips">
-                            <span className="chip-title">Soft Skills:</span>
-                            {softSkills.map((label, index) => (
-                                <Chip key={index} className="chip" label={label} />
-                            ))}
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+              <div className="tag-list">
+                {group.technologies.map((technology) => {
+                  const icon = techIcons[technology];
+                  return (
+                    <span key={technology} className={`tag${icon ? " tag--has-icon" : ""}`}>
+                      {icon && (
+                        <span className="tag__icon" aria-hidden="true">{icon}</span>
+                      )}
+                      {technology}
+                    </span>
+                  );
+                })}
+              </div>
+            </FadeIn>
+          ))}
         </div>
-    );
+      </div>
+    </section>
+  );
 }
 
 export default Skills;

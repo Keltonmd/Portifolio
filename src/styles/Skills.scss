@@ -1,125 +1,84 @@
-/* Container geral da seção */
-#skills {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding-top: 0px;
+/* ── Resumo profissional ─────────────────────────────────────────────── */
+.skills-summary {
+  display: grid;
+  gap: 10px;
+  margin-bottom: 24px;
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
 }
 
-/* Wrapper principal */
-.skills-container {
-  padding: 5% 10%;
-  display: flex;
-  flex-direction: column;
-  text-align: left;
+.skills-summary__label {
+  color: var(--accent-strong) !important;
 }
 
-/* Grid de habilidades */
+.skills-summary__text {
+  color: var(--muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+}
+
+/* ── Grid de cards ───────────────────────────────────────────────────── */
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-gap: 50px;
-
-  .skill {
-    text-align: left;
-
-    h3 {
-      margin-top: 15px;
-      margin-bottom: 10px;
-      font-size: 1.5rem;
-    }
-
-    svg {
-      color: white;
-    }
-
-    p {
-      font-size: 1rem;
-      margin-bottom: 15px;
-      line-height: 1.5;
-    }
-  }
+  gap: 14px;
 }
 
-/* Chips (tecnologias) */
-.chip {
-  color: #272822 !important;
-  background-color: white !important;
-  font-size: 0.8rem !important;
-  height: 26px !important;
-
-  span {
-    font-family: 'Courier Prime', monospace !important;
-    color: #272822 !important;
-  }
-
-  svg {
-    height: 14px !important;
-  }
+.capability-card {
+  display: grid;
+  gap: 12px;
 }
 
-/* Grupo de chips */
-.flex-chips {
-  line-height: 2;
-  margin-top: 10px;
-
-  .chip-title {
-    color: white;
-    padding-right: 10px;
-    font-family: 'Courier Prime', monospace;
-    font-weight: bold;
-  }
-
-  .MuiChip-root {
-    margin-right: 0.5em;
-    margin-bottom: 0.5em;
-  }
+/* Cabeçalho com ícone + título */
+.capability-card__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* Chips outlined (caso use algum) */
-.flex-chips .MuiChip-outlined {
-  background-color: #e0e0e0 !important;
-  border: 1px solid #bdbdbd !important;
-  font-family: 'Courier Prime', monospace;
+.capability-card__icon {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: rgba(78, 123, 255, 0.12);
+  color: var(--accent-strong);
+  flex-shrink: 0;
 }
 
-.flex-chips .MuiChip-outlined span {
-  color: #272822 !important;
+.capability-card__header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
 }
 
-/* ===================== RESPONSIVIDADE ===================== */
-@media (max-width: 1024px) {
+.capability-card__summary {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.65;
+}
+
+/* ── Responsivo ──────────────────────────────────────────────────────── */
+@media (min-width: 600px) {
   .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 40px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
-@media (max-width: 768px) {
-  .skills-container {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-
+@media (min-width: 992px) {
   .skills-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .skill {
-    padding-bottom: 30px;
+  /* Backend (1º card) ocupa 2 colunas — foco principal */
+  .capability-card:nth-child(1) {
+    grid-column: span 2;
   }
 }
 
-@media (max-width: 567px) {
-  #skills {
-    font-size: 14px;
-  }
-
-  .skills-container h1 {
-    font-size: 2.2rem;
-  }
-
-  .skill p {
-    font-size: 0.9rem;
+@media (prefers-reduced-motion: reduce) {
+  .capability-card__icon {
+    transition: none;
   }
 }
