@@ -1,86 +1,52 @@
-.footer {
-  text-align: center;
-  padding-top: 50px;
-  padding-bottom: 40px;
-  margin-top: 60px;
+.site-footer {
+  border-top: 1px solid var(--border);
+}
 
+.site-footer__inner {
+  width: min(calc(100% - 32px), var(--container));
+  margin: 0 auto;
+  padding: 32px 0 44px;
+  display: grid;
+  gap: 16px;
+  /* Centralizado */
+  text-align: center;
+  justify-items: center;
+}
+
+.site-footer__eyebrow {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.site-footer__description,
+.site-footer__meta {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.site-footer__links {
   display: flex;
-  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.site-footer__links a {
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-
-  .footer-social {
-    margin-bottom: 15px;
-    color: white;
-
-    a {
-      color: inherit;
-      margin: 0 10px;
-
-      svg {
-        width: 1.3em !important;
-        height: 1.3em !important;
-        transition: transform 0.2s ease-in-out, color 0.2s;
-
-        &:hover {
-          transform: scale(1.15);
-          color: #5000ca;
-        }
-      }
-    }
-  }
-
-  .footer-text {
-    font-size: 0.9em;
-    opacity: 0.8;
-    margin: 5px 0;
-  }
-
-  .footer-name {
-    font-weight: bold;
-    color: #b67bff;
-  }
-
-  .footer-template {
-    font-size: 0.75em;
-    opacity: 0.5;
-    margin-top: 5px;
-  }
+  background: var(--panel);
+  transition: border-color var(--transition), color var(--transition), transform var(--transition);
 }
 
-/* Modo Claro */
-.light-mode {
-  .footer-social a svg {
-    color: #0d1116;
-  }
-
-  .footer-text,
-  .footer-template {
-    color: #0d1116;
-  }
-
-  .footer-name {
-    color: #5000ca;
-  }
-}
-
-/* Responsivo */
-@media (max-width: 600px) {
-  .footer {
-    padding-top: 40px;
-    padding-bottom: 30px;
-
-    .footer-social svg {
-      width: 1.2em !important;
-      height: 1.2em !important;
-    }
-
-    .footer-text {
-      font-size: 0.85em;
-    }
-
-    .footer-template {
-      font-size: 0.7em;
-    }
-  }
+.site-footer__links a:hover {
+  border-color: var(--accent);
+  color: var(--accent-strong);
+  transform: translateY(-2px);
 }

@@ -1,171 +1,163 @@
+import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
+import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import { useEffect, useState } from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import LightModeIcon from "@mui/icons-material/LightMode";
-import List from "@mui/material/List";
-import ListIcon from "@mui/icons-material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
+import { navigationItems } from "../data/siteContent";
 
-const drawerWidth = 240;
+type NavigationProps = {
+  theme: "dark" | "light";
+  onToggleTheme: () => void;
+};
 
-const navItems: [string, string][] = [
-  ["Skills", "skills"],
-  ["História", "history"],
-  ["Projetos", "projects"],
-  ["Contato", "contact"],
-];
-
-interface NavigationProps {
-  parentToChild: {
-    mode: "light" | "dark";
-  };
-  modeChange: () => void;
-}
-
-function Navigation({ parentToChild, modeChange }: NavigationProps) {
-  const { mode } = parentToChild;
-
-  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
-  const [scrolled, setScrolled] = useState<boolean>(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen((prev) => !prev);
-  };
+function Navigation({ theme, onToggleTheme }: NavigationProps) {
+  const [activeId, setActiveId] = useState("home");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const navbar = document.getElementById("navigation");
-      if (navbar) {
-        setScrolled(window.scrollY > navbar.clientHeight);
-      }
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const sections = navigationItems
+      .map((item) => document.getElementById(item.id))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (entryA, entryB) =>
+              entryB.intersectionRatio - entryA.intersectionRatio,
+          )[0];
+
+        if (!visibleEntry) {
+          return;
+        }
+
+        const nextId = visibleEntry.target.id;
+        setActiveId(nextId);
+
+        if (window.location.hash !== `#${nextId}`) {
+          window.history.replaceState(null, "", `#${nextId}`);
+        }
+      },
+      {
+        rootMargin: "-35% 0px -45% 0px",
+        threshold: [0.2, 0.45, 0.7],
+      },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    const syncScrollState = () => setIsScrolled(window.scrollY > 24);
+
+    syncScrollState();
+    window.addEventListener("scroll", syncScrollState, { passive: true });
+
+    return () => window.removeEventListener("scroll", syncScrollState);
+  }, []);
+
+  useEffect(() => {
+    if (!window.location.hash) {
+      return;
     }
+
+    const id = window.location.hash.replace("#", "");
+    const element = document.getElementById(id);
+
+    if (!element) {
+      return;
+    }
+
+    const timeout = window.setTimeout(() => {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+      setActiveId(id);
+    }, 120);
+
+    return () => window.clearTimeout(timeout);
+  }, []);
+
+  const navigateTo = (id: string) => {
+    const element = document.getElementById(id);
+
+    if (!element) {
+      return;
+    }
+
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", `#${id}`);
+    setActiveId(id);
+    setIsMenuOpen(false);
   };
 
-  const drawer = (
-    <Box className="navigation-bar-responsive" onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <p className="mobile-menu-top">
-        <ListIcon /> Menu
-      </p>
-      <Divider />
-
-      <List>
-        {navItems.map(([label, id]) => (
-          <ListItem key={label} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }} onClick={() => scrollToSection(id)}>
-              <ListItemText primary={label} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  );
-
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar
-        component="nav"
-        id="navigation"
-        className={`navbar-fixed-top${scrolled ? " scrolled" : ""}`}
-      >
-        <Toolbar
-          className="navigation-bar"
-          sx={{
-            display: "flex !important",
-            flexDirection: "row !important",
-            alignItems: "center !important",
-            width: "100% !important",
-            justifyContent: "space-between !important",
-            px: 2,
-          }}
+    <header className={`site-navigation${isScrolled ? " is-scrolled" : ""}`}>
+      <div className="site-navigation__inner">
+        <button
+          className="site-navigation__brand"
+          type="button"
+          onClick={() => navigateTo("home")}
+          aria-label="Voltar para o início"
         >
-          {/* ESQUERDA — menu mobile + nav desktop */}
-          <Box
-            sx={{
-              display: "flex !important",
-              alignItems: "center !important",
-              justifyContent: "flex-start !important",
-            }}
+          <span className="site-navigation__brand-mark">KM</span>
+          <span className="site-navigation__brand-copy">
+            <strong>Kelton Martins</strong>
+            <small>Dev Full Stack</small>
+          </span>
+        </button>
+
+        <button
+          className="site-navigation__toggle"
+          type="button"
+          aria-expanded={isMenuOpen}
+          aria-controls="site-navigation-menu"
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          Menu
+        </button>
+
+        <div
+          id="site-navigation-menu"
+          className={`site-navigation__menu${isMenuOpen ? " is-open" : ""}`}
+        >
+          <nav aria-label="Navegação principal">
+            {navigationItems.map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                className={`site-navigation__link${
+                  activeId === item.id ? " is-active" : ""
+                }`}
+                aria-pressed={activeId === item.id}
+                onClick={() => navigateTo(item.id)}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <button
+            type="button"
+            className="site-navigation__theme"
+            onClick={onToggleTheme}
+            aria-label={
+              theme === "dark" ? "Ativar tema claro" : "Ativar tema escuro"
+            }
           >
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              sx={{
-                mr: 1,
-                display: { xs: "inline-flex", sm: "none" }
-              }}
-            >
-              <MenuIcon />
-            </IconButton>
+            {theme === "dark" ? <LightModeRoundedIcon /> : <DarkModeRoundedIcon />}
+          </button>
 
-            {/* NAV DESKTOP */}
-            <Box
-              // Isso esconde os itens da navegação para menu
-              sx={{
-                display: { xs: "none", sm: "flex" },
-                gap: 1
-              }}
-            >
-              {navItems.map(([label, id]) => (
-                <Button
-                  key={label}
-                  onClick={() => scrollToSection(id)}
-                  sx={{ color: "#fff" }}
-                >
-                  {label}
-                </Button>
-              ))}
-            </Box>
-          </Box>
-
-          {/* DIREITA — ícone de tema */}
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            {mode === "dark" ? (
-              <LightModeIcon onClick={modeChange} sx={{ cursor: "pointer" }} />
-            ) : (
-              <DarkModeIcon onClick={modeChange} sx={{ cursor: "pointer" }} />
-            )}
-          </Box>
-        </Toolbar>
-      </AppBar>
-
-      {/* Drawer (mobile) */}
-      <nav>
-        <Drawer
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{ keepMounted: true }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
-    </Box>
+          <button
+            type="button"
+            className="button button--primary site-navigation__cta"
+            onClick={() => navigateTo("contact")}
+          >
+            Falar sobre um projeto
+          </button>
+        </div>
+      </div>
+    </header>
   );
 }
 
