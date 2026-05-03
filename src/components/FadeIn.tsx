@@ -1,66 +1,83 @@
-import React, { useEffect, useState, Children } from "react";
-import type { PropsWithChildren } from "react";
+import { useEffect, useRef, useState } from "react";
+import type { CSSProperties, PropsWithChildren } from "react";
 
-interface FadeInProps {
-  delay?: number;
-  transitionDuration?: number;
-  wrapperTag?: React.ElementType;
-  childTag?: React.ElementType;
+type FadeInProps = PropsWithChildren<{
   className?: string;
-  childClassName?: string;
+  delay?: number;
+  duration?: number;
+  distance?: number;
+  threshold?: number;
+  once?: boolean;
   visible?: boolean;
-  onComplete?: () => void;
-}
+}>;
 
 export default function FadeIn({
-  delay = 50,
-  transitionDuration = 400,
-  wrapperTag: WrapperTag = "div",
-  childTag: ChildTag = "div",
   className,
-  childClassName,
+  delay = 0,
+  duration = 420,
+  distance = 18,
+  threshold = 0.18,
+  once = true,
   visible = true,
-  onComplete,
   children,
-}: PropsWithChildren<FadeInProps>) {
-  const [maxVisible, setMaxVisible] = useState(0);
-
-  const totalChildren = Children.count(children);
-  const targetVisible = visible ? totalChildren : 0;
+}: FadeInProps) {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Quando terminar a animação
-    if (maxVisible === targetVisible) {
-      if (onComplete) {
-        const timeout = setTimeout(onComplete, transitionDuration);
-        return () => clearTimeout(timeout);
-      }
+    if (!visible) {
+      setIsVisible(false);
       return;
     }
 
-    const step = targetVisible > maxVisible ? 1 : -1;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-    const timeout = setTimeout(() => {
-      setMaxVisible((v) => v + step);
-    }, delay);
+    if (prefersReducedMotion) {
+      setIsVisible(true);
+      return;
+    }
 
-    return () => clearTimeout(timeout);
-  }, [maxVisible, targetVisible, delay, transitionDuration, onComplete]);
+    const element = ref.current;
+
+    if (!element) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          if (once) {
+            observer.unobserve(entry.target);
+          }
+        } else if (!once) {
+          setIsVisible(false);
+        }
+      },
+      { threshold },
+    );
+
+    observer.observe(element);
+
+    return () => observer.disconnect();
+  }, [once, threshold, visible]);
+
+  const style = {
+    "--fade-delay": `${delay}ms`,
+    "--fade-duration": `${duration}ms`,
+    "--fade-distance": `${distance}px`,
+  } as CSSProperties;
 
   return (
-    <WrapperTag className={className}>
-      {Children.map(children, (child, index) => (
-        <ChildTag
-          className={childClassName}
-          style={{
-            transition: `opacity ${transitionDuration}ms ease, transform ${transitionDuration}ms ease`,
-            transform: maxVisible > index ? "none" : "translateY(20px)",
-            opacity: maxVisible > index ? 1 : 0,
-          }}
-        >
-          {child}
-        </ChildTag>
-      ))}
-    </WrapperTag>
+    <div
+      ref={ref}
+      className={className}
+      data-reveal={isVisible ? "visible" : "hidden"}
+      style={style}
+    >
+      {children}
+    </div>
   );
 }
